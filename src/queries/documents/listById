@@ -11,6 +11,7 @@
         email
         created_at
         action { name }
+        verifications { id type verified_at user { images confidence } }
         link { short_link }
         user { id name email }
         email_events { sent opened delivered refused reason }
