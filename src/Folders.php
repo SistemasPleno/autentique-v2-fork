@@ -2,6 +2,7 @@
 
 namespace vinicinbgs\Autentique;
 
+use vinicinbgs\Autentique\exceptions\EmptyTokenException;
 use vinicinbgs\Autentique\Utils\Query;
 
 /**
@@ -44,13 +45,14 @@ class Folders extends BaseResource
         return $this->api->request($this->token, $graphQuery, "json");
     }
 
-    /**
-     * List folder by id
-     *
-     * @param string $folderId
-     *
-     * @return array
-     */
+  /**
+   * List folder by id
+   *
+   * @param string $folderId
+   *
+   * @return array
+   * @throws EmptyTokenException
+   */
     public function listById(string $folderId): array
     {
         $graphQuery = $this->query->query(__FUNCTION__);
