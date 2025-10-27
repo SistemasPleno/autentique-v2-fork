@@ -4,7 +4,7 @@
     refusable
     sortable
     created_at
-    folder_id
+    folder
     files { original signed }
     signatures {
         public_id
