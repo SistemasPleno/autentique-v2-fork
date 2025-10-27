@@ -31,13 +31,24 @@ class Signatures extends BaseResource {
    * @throws EmptyTokenException
    * @throws Exception
    */
-  public function approveBiometric( int $page = 1): array
+  public function approveBiometric( array $attributes): array
     {
-        $graphQuery = $this->query->query(__FUNCTION__);
+      $variables = [
+            "verification_id" => $attributes["verification_id"],
+            "public_id" => $attributes["public_id"],
+        ];
 
-        $graphQuery = $this->query->setVariables("page", $page, $graphQuery);
+        $queryFile = __FUNCTION__;
 
-        return $this->api->request($this->token, $graphQuery, "json");
+
+        $graphMutation = $this->query->query($queryFile);
+        $graphMutation = $this->query->setVariables(
+            ["variables", "sandbox"],
+            [json_encode($variables), $this->sandbox],
+            $graphMutation
+        );
+
+        return $this->api->request($this->token, $graphMutation, "json");
     }
 
 }
