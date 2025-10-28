@@ -1,5 +1,5 @@
 "mutation (
-  $verification_id: UUID!,
+  $verification_id: Int!,
   $public_id: UUID!
 ){
   approveBiometric(verification_id: $verification_id, public_id: $public_id){
