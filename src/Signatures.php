@@ -9,9 +9,9 @@ use vinicinbgs\Autentique\Utils\Query;
 class Signatures extends BaseResource {
 
   /**
-     * @var Query
-     */
-    private $query;
+   * @var Query
+   */
+  private $query;
 
   /**
    * Signatures Constructor
@@ -26,29 +26,51 @@ class Signatures extends BaseResource {
   }
 
   /**
-   * @param int $page
+   * @param array $attributes
    * @return array
    * @throws EmptyTokenException
-   * @throws Exception
    */
-  public function approveBiometric( array $attributes): array
-    {
-      $variables = [
-            "verification_id" => $attributes["verification_id"],
-            "public_id" => $attributes["public_id"],
-        ];
+  public function approveBiometric ( array $attributes ): array {
+    $variables = [
+      "verification_id" => $attributes["verification_id"],
+      "public_id" => $attributes["public_id"],
+    ];
 
-        $queryFile = __FUNCTION__;
+    $queryFile = __FUNCTION__;
 
 
-        $graphMutation = $this->query->query($queryFile);
-        $graphMutation = $this->query->setVariables(
-            ["variables", "sandbox"],
-            [json_encode($variables), $this->sandbox],
-            $graphMutation
-        );
+    $graphMutation = $this->query->query($queryFile);
+    $graphMutation = $this->query->setVariables(
+      ["variables", "sandbox"],
+      [json_encode($variables), $this->sandbox],
+      $graphMutation
+    );
 
-        return $this->api->request($this->token, $graphMutation, "json");
-    }
+    return $this->api->request($this->token, $graphMutation, "json");
+  }
+
+  /**
+   * @param array $attributes
+   * @return array
+   * @throws EmptyTokenException
+   */
+  public function rejectBiometric ( array $attributes ): array {
+    $variables = [
+      "verification_id" => $attributes["verification_id"],
+      "public_id" => $attributes["public_id"],
+    ];
+
+    $queryFile = __FUNCTION__;
+
+
+    $graphMutation = $this->query->query($queryFile);
+    $graphMutation = $this->query->setVariables(
+      ["variables", "sandbox"],
+      [json_encode($variables), $this->sandbox],
+      $graphMutation
+    );
+
+    return $this->api->request($this->token, $graphMutation, "json");
+  }
 
 }

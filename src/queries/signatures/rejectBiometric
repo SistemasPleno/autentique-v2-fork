@@ -1,0 +1,23 @@
+"mutation (
+  $verification_id: Int!,
+  $public_id: UUID!
+){
+  rejectBiometric(verification_id: $verification_id, public_id: $public_id){
+  public_id
+  name
+  email
+  delivery_method
+  user { id name email phone }
+  verifications {
+    id
+    type
+    verify_phone
+    payload { url reference }
+    user { images confidence }
+    verified_at
+    max_attempt
+    logs_attempt
+  }
+ }
+}",
+"variables": $variables
